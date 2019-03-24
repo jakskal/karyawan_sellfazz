@@ -34,6 +34,14 @@ class User extends Model {
   tokens () {
     return this.hasMany('App/Models/Token')
   }
+  perusahaan(){
+    return this.hasOne('App/models/Perusahaan','id','pemilik')
+  }
+  kepegawaian(){
+    return this
+    .belongsToMany('app/models/Perusahaan','ktp','tdp','ktp','tdp')
+    .withPivot(['status'])
+  }
 }
 
 module.exports = User

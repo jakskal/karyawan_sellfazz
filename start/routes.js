@@ -21,4 +21,8 @@ Route.on('/').render('welcome')
 Route.group(()=>{
     Route.post('auth/register','UserController.register');
     Route.post('auth/login','Usercontroller.login')
+
+    Route.get('perusahaan','PerusahaanController.index').middleware(['auth'])
+    Route.post('perusahaan','PerusahaanController.create').middleware(['auth'])
+    Route.delete('perusahaan/:id','PerusahaanController.destroy').middleware(['auth'])
 }).prefix('api/v1');
