@@ -9,6 +9,22 @@ class AuthorizationService{
             throw new InvalidAccessException()
         }
     }
+    verifyPegawai(resource,user){
+        if(!resource){
+            throw new ResourceNotExist()
+        }
+        if(resource.ktp !== user.ktp){
+            throw new InvalidAccessException()
+        }
+    }
+    verifyPertemanan(resource, user){
+        if(!resource){
+            throw new ResourceNotExist()
+        }
+        if(resource.ktp_user !== user.ktp){
+            throw new InvalidAccessException()
+        }
+    }
 }
 
 module.exports = new AuthorizationService()

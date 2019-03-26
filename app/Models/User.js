@@ -39,8 +39,12 @@ class User extends Model {
   }
   kepegawaian(){
     return this
-    .belongsToMany('app/models/Perusahaan','ktp','tdp','ktp','tdp')
+    .belongsToMany('App/models/Perusahaan','ktp','tdp','ktp','tdp')
+    .pivotModel('App/models/kepegawaian')
     .withPivot(['status'])
+  }
+  static get hidden () {
+    return ['password','username']
   }
 }
 

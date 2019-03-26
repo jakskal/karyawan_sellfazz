@@ -7,7 +7,7 @@ class KepegawaianSchema extends Schema {
   up () {
     this.create('kepegawaians', (table) => {
       table.integer('tdp').unsigned().references('tdp').inTable('perusahaans')
-      table.integer('ektp').unsigned().references('ektp').inTable('perusahaans')
+      table.integer('ktp').unsigned().references('ktp').inTable('users')
       table.enu('status',['sedang','telah']).defaultTo('sedang')
       table.timestamps()
     })

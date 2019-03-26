@@ -22,8 +22,22 @@ class PerusahaanController {
    * @param {View} ctx.view
    */
   async index ({ request, response, auth }) {
-  const user = await auth.getUser()
-  return await user.perusahaan().fetch();
+    const {perusahaan,tdp}=request.get()
+    let {kepegawaian}=request.get()
+    if (kepegawaian == "sedang/telah"||kepegawaian == "telah/sedang"){
+      kepegawaian = ""
+    }
+    if(perusahaan){
+      return await Perusahaan.query().where('nama','like',`%${perusahaan}%`).fetch()
+    }else if(tdp && kepegawaian){
+      return await Perusahaan.query().where({tdp}).with('kepegawaian',(builder)=>{
+        builder.where({status:kepegawaian})
+      }).fetch()
+    }else if(tdp){
+      return await Perusahaan.query().where({tdp}).with('kepegawaian').fetch()
+
+    }
+  return await Perusahaan.query().with('user').fetch()
   }
 
   /**
@@ -40,7 +54,6 @@ class PerusahaanController {
     const body = request.all()
     const perusahaan = new Perusahaan();
     perusahaan.fill(body)
-
     await user.perusahaan().save(perusahaan)
     return perusahaan
   
@@ -89,7 +102,14 @@ class PerusahaanController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
+  async update ({ params, request, auth }) {
+    const user = await auth.getUser();
+    const {id} = params;
+    const perusahaan = await Perusahaan.find(id);
+    AuthorizationService.verifyPemilik(perusahaan, user)
+    perusahaan.merge(request.only('nama'))
+    await perusahaan.save()
+    return perusahaan
   }
 
   /**
