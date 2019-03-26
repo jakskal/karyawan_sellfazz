@@ -24,7 +24,7 @@ adonis migration:run
 adonis serve --dev
 ```
 
-##based on task
+## based on task
 
 a. mencari perusahaan berdasarkan nama perusahaan
 ```js
