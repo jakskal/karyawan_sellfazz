@@ -1,0 +1,763 @@
+{
+	"info": {
+		"_postman_id": "bd5e0b4f-3463-46c9-8293-8d3b1b12f3f5",
+		"name": "karyawan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "50da872c-263d-4cf1-9542-19b1017e5950",
+								"exec": [
+									"pm.environment.set('auth','bearer '+pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ktp\":8,\n\t\"first_name\":\"angling8\",\n\t\"last_name\":\"zainuddin3\",\n\t\"username\":\"8\",\n\t\"password\":\"1234\",\n\t\"email\":\"user8@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "54f1dc06-974e-4d3f-8bf1-dcfbb044ddcf",
+								"exec": [
+									"pm.environment.set('auth','bearer '+pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ktp\":3212,\n\t\"first_name\":\"angling\",\n\t\"last_name\":\"zainuddin\",\n\t\"username\":\"user1\",\n\t\"password\":\"1234\",\n\t\"email\":\"user1@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "perusahaan",
+			"item": [
+				{
+					"name": "list perusahaan",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/perusahaan?perusahaan=pikabu",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"perusahaan"
+							],
+							"query": [
+								{
+									"key": "perusahaan",
+									"value": "pikabu"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create perusahaan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"tdp\":22,\n\t\"nama\":\"indomaret\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/perusahaan",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"perusahaan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete perusahaan",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{auth}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/perusahaan/3",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"perusahaan",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update perusahaan",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"tdp\":21324,\n\t\"nama\":\"pikabu terbarukan\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/perusahaan/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"perusahaan",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "kepgawaian",
+			"item": [
+				{
+					"name": "list kepegawaian",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/kepegawaian",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"kepegawaian"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update status pegawai user",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"tdp\":2123,\n\t\"status\":\"sedang\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/kepegawaian",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"kepegawaian"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete kepegawaian",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"tdp\":11\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/kepegawaian",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"kepegawaian"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user jadi pegawai",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"tdp\":2123,\n\t\"status\":\"sedang\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/kepegawaian",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"kepegawaian"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user/karyawan",
+			"item": [
+				{
+					"name": "list user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/user?ktp=32213",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							],
+							"query": [
+								{
+									"key": "ktp",
+									"value": "32213"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "50da872c-263d-4cf1-9542-19b1017e5950",
+								"exec": [
+									"pm.environment.set('auth','bearer '+pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ktp\":321,\n\t\"first_name\":\"ahmadg\",\n\t\"last_name\":\"sanusi\",\n\t\"username\":\"aa\",\n\t\"password\":\"1234\",\n\t\"email\":\"user5@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/user",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "50da872c-263d-4cf1-9542-19b1017e5950",
+								"exec": [
+									"pm.environment.set('auth','bearer '+pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ktp\":321,\n\t\"first_name\":\"uus\",\n\t\"last_name\":\"sanusi\",\n\t\"username\":\"aa\",\n\t\"password\":\"1234\",\n\t\"email\":\"user2@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/user",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "riwayat kerja karyawan",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/user/riwayat?ktp=32213",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"riwayat"
+							],
+							"query": [
+								{
+									"key": "ktp",
+									"value": "32213"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pertemanan",
+			"item": [
+				{
+					"name": "list teman",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/pertemanan",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"pertemanan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "terima permintaan pertemanan",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ktp_teman\":4\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/pertemanan/terima",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"pertemanan",
+								"terima"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list permintaan pertemanan",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/pertemanan/permintaan",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"pertemanan",
+								"permintaan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "kirim permintaan pertemanan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ktp_teman\":1\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/pertemanan",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"pertemanan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hapus pertemanan",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ktp_teman\":4\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/pertemanan",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"pertemanan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update statys pertemanan",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ktp_teman\":4\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/api/v1/pertemanan",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"api",
+								"v1",
+								"pertemanan"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

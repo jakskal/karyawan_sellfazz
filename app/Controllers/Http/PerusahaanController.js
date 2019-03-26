@@ -28,14 +28,28 @@ class PerusahaanController {
       kepegawaian = ""
     }
     if(perusahaan){
-      return await Perusahaan.query().where('nama','like',`%${perusahaan}%`).fetch()
+      let result = await Perusahaan.query().where('nama','like',`%${perusahaan}%`).fetch()
+      result = JSON.parse(JSON.stringify(result))
+      if (result.length == 0){
+        return {message:"resource not found"}
+      }
+      return result
     }else if(tdp && kepegawaian){
-      return await Perusahaan.query().where({tdp}).with('kepegawaian',(builder)=>{
+      let result = await Perusahaan.query().where({tdp}).with('kepegawaian',(builder)=>{
         builder.where({status:kepegawaian})
       }).fetch()
+      result = JSON.parse(JSON.stringify(result))
+      if (result.length == 0){
+        return {message:"resource not found"}
+      }
+      return result
     }else if(tdp){
-      return await Perusahaan.query().where({tdp}).with('kepegawaian').fetch()
-
+      let result = await Perusahaan.query().where({tdp}).with('kepegawaian').fetch()
+      result = JSON.parse(JSON.stringify(result))
+      if (result.length == 0){
+        return {message:"resource not found"}
+      }
+      return result
     }
   return await Perusahaan.query().with('user').fetch()
   }
@@ -57,41 +71,6 @@ class PerusahaanController {
     await user.perusahaan().save(perusahaan)
     return perusahaan
   
-  }
-
-  /**
-   * Create/save a new perusahaan.
-   * POST perusahaans
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async store ({ request, response }) {
-  }
-
-  /**
-   * Display a single perusahaan.
-   * GET perusahaans/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async show ({ params, request, response, view }) {
-  }
-
-  /**
-   * Render a form to update an existing perusahaan.
-   * GET perusahaans/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
   }
 
   /**

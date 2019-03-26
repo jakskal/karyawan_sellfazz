@@ -36,7 +36,6 @@ class PertemananController {
       .where({ktp_user:ktp,status}).select('ktp','first_name','last_name')
       return pertemanan
     }else if(ktp && teman && !status){
-      console.log('here');
       if (teman !== "bukan"){
         return {message:"perintah tidak diketahui, untuk mencari teman-temanya teman teman yang bukan teman teman silahkan masukan nilai query ktp=@ktp&teman=bukan"}
       }
