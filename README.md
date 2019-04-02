@@ -74,3 +74,5 @@ adonis route:list
 Note = id perusahaan bukan tdp, 
 
 ### tersedia file postman dengan nama `karyawan.postman_collection.json` untuk mempermudah mengetahui bagaimana route bekerja
+### tersedia dump dengan nama `karyawan` file mysql untuk mendukung test berdasarkan fitur yang diinginkan
+### test mungkin tidak sukses seluruhnya untuk pertama kali , coba beberapa kali menjalankan command `adonis test`

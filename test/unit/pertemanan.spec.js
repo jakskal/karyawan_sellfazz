@@ -117,7 +117,7 @@ test('delete pertemanan', async({assert, client})=>{
   failOnError(response.error)
   response.assertStatus(200)
   response.assertJSONSubset({
-    message : `pertemanan user dengan id ${data.ktp_teman} dan id ${data.ktp_user} berhasil dihapus `
+    message : `pertemanan user dengan id ${data.ktp_user} dan id ${data.ktp_teman} berhasil dihapus `
   })
   
 })

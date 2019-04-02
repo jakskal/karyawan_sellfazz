@@ -110,7 +110,7 @@ class PertemananController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, auth }) {
+  async destroy ({ response, request, auth }) {
     const user = await auth.getUser();
     const {ktp_teman} = request.all();
     const pertemanan = await Pertemanan.findBy({ktp_user:user.ktp,ktp_teman});
