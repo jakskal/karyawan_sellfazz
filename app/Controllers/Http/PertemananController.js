@@ -73,7 +73,11 @@ class PertemananController {
       ktp_teman,
     })
     await pertemanan.save()
-    return {message:`permintaan pertemanan terkirim`}
+    response.status(201)
+    return {
+      message:`permintaan pertemanan terkirim`,
+      pertemanan : await Pertemanan.findBy({ktp_teman,ktp_user:user.ktp})
+    }
   }
 
 
@@ -111,22 +115,27 @@ class PertemananController {
     const {ktp_teman} = request.all();
     const pertemanan = await Pertemanan.findBy({ktp_user:user.ktp,ktp_teman});
     AuthorizationService.verifyPertemanan(pertemanan, user)
-    await Pertemanan.query().where({ktp_user:user.ktp,ktp_teman}).delete()
-    return pertemanan
+    await Pertemanan.query().where({ktp_user : user.ktp, ktp_teman}).delete()
+    await Pertemanan.query().where({ktp_user : ktp_teman, ktp_teman : user.ktp}).delete()
+    
+      response.status(200)
+      return {message : `pertemanan user dengan id ${user.ktp} dan id ${ktp_teman} berhasil dihapus `}
+    
   }
 
   async permintaan ({auth}){
     const user = await auth.getUser();
-    const permintaan = await Pertemanan.findBy({ktp_teman:user.ktp,status:"menunggu"})
+    const permintaan = await Pertemanan.query().where({ktp_teman:user.ktp,status:"menunggu"}).fetch()
     if(!permintaan){
       return {message:"tidak ada permintaan pertemanan"}
     }
     return permintaan
   }
+
   async terimaPermintaan({request, auth}){
     const user = await auth.getUser();
     const {ktp_teman} = request.all()
-    const permintaan = await Pertemanan.query().where({ktp_teman:user.ktp,status:"menunggu"})
+    const permintaan = await Pertemanan.query().where({ktp_teman:user.ktp, ktp_user:ktp_teman, status:"menunggu"})
                               .update({status:"teman"})
     if (!permintaan){
       return {message:"penerimaan gagal"}

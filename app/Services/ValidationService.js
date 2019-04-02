@@ -14,8 +14,6 @@ class ValidationService{
         }
     }
     kepegawaianStatusValidation(resource, status){
-        console.log('sini');
-        console.log(resource);
         if(!resource){
             console.log('masuk');
             throw new ResourceNotExist()

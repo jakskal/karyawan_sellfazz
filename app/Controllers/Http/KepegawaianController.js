@@ -50,7 +50,7 @@ class KepegawaianController {
     })
     await kepegawaian.save()
     await this.updatePertemanan(tdp,user,status)
- 
+    response.status(201)
   return kepegawaian
   }
 

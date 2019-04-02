@@ -69,6 +69,7 @@ class PerusahaanController {
     const perusahaan = new Perusahaan();
     perusahaan.fill(body)
     await user.perusahaan().save(perusahaan)
+    response.status(201)
     return perusahaan
   
   }
@@ -105,7 +106,7 @@ class PerusahaanController {
     const perusahaan = await Perusahaan.find(id);
     AuthorizationService.verifyPemilik(perusahaan, user)
     await perusahaan.delete();
-    return perusahaan
+    return {deleted_perusahaan : perusahaan}
   }
 }
 

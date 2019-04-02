@@ -7,10 +7,10 @@ class UserController {
         return token
     }
 
-    async register({request}){
+    async register({request, response}){
         const body = request.all();
         const user = await User.create(body)
-       return user
+        response.status(201).send(user)
     };
 
     async index({request}){
