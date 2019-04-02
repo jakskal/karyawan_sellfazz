@@ -9,8 +9,8 @@ class UserController {
 
     async register({request}){
         const body = request.all();
-        await User.create(body)
-        return this.login(...arguments)
+        const user = await User.create(body)
+       return user
     };
 
     async index({request}){
@@ -34,6 +34,7 @@ class UserController {
             return user
         }
         const users = await User.all()
+        // Response.status(200)
         return users
     }
 
@@ -58,7 +59,11 @@ class UserController {
     async riwayat({request}){
         const {ktp} = request.get()
         const riwayat = await User.findBy({ktp})
-        return riwayat.kepegawaian().fetch()
+        const result = riwayat.kepegawaian().fetch()
+        if(!result){
+            return {message :" resource not found"}
+        }
+        return result
     }
 }
 

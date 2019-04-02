@@ -28,7 +28,7 @@ adonis serve --dev
 
 a. mencari perusahaan berdasarkan nama perusahaan
 ```js
-localhost:3333/api/v1/perusahaan?nama={alfamart}
+localhost:3333/api/v1/perusahaan?perusahaan={alfamart}
 ```
 b. mendapatkan perusahaan berdasarkan tdp
 ```js
